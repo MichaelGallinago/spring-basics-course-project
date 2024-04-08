@@ -51,6 +51,12 @@ public class App {
         
         event = ctx.getBean(Event.class);
         logEvent(null, event, "Some event for 3");
+
+        event = ctx.getBean(Event.class);
+        logEvent(EventType.DB_INFO, event, "Some event for database, but it's unique");
+
+        event = ctx.getBean(Event.class);
+        logEvent(EventType.FILE_INFO, event, "Some event for file, but it's precious");
     }
     
     public App() {}
@@ -63,7 +69,9 @@ public class App {
     }
 
     private void logEvent(EventType eventType, Event event, String msg) {
-        String message = msg.replaceAll(client.getId(), client.getFullName());
+        String message = msg.replaceAll(client.getId(),
+                String.format("%s, from %s", client.getFullName(), client.getCity()));
+
         event.setMsg(message);
         
         EventLogger logger = loggers.get(eventType);

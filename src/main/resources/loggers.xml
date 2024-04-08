@@ -10,6 +10,8 @@
  		http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
+	<import resource="db.xml"/>
+
 	<bean id="consoleEventLogger" class="com.yet.spring.core.loggers.ConsoleEventLogger"
 		p:name="Console logger" />
 
@@ -34,5 +36,5 @@
 		<constructor-arg ref="combinedLoggersList"/>
 		<property name="name" value="#{'Combined ' + combinedLoggersList.![name].toString()}" />
 	</bean>
-    
+
 </beans>
